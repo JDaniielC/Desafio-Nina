@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --primary-color: #5B43D9;
+  --secondary-color: #9886F2;
+  --primary-light: #C9BEFF;
+  --primary-lighter: #F1ECFF;
+
+  --black-color: #050505;
+  --black-secondary: #313131;
+  --black-light: #515151;
+  --black-lighter: #F1ECFF;
+  --dark-color: #000;
+
+  --gray-color: #89888E;
+  --gray-secondary: #B6B5BB;
+  --gray-light: #E9E8EB;
+  --gray-lighter: #F8F8F8;
+
+  --white-color: #050505;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--black-color);
+}
+
+h1 {
+  font-size: 48px;
+  line-height: 64px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 28px;
+  line-height: 40px;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+legend {
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 400, 500, bold;
+}
