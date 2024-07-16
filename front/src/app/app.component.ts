@@ -7,9 +7,8 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [
-    RouterOutlet
+    RouterOutlet,
   ]
 })
 export class AppComponent {
-  title = 'front';
 }
