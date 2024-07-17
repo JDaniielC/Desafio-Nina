@@ -8,9 +8,10 @@ The provided functions are injected at application startup and executed during a
 See more: https://angular.dev/api/core/APP_INITIALIZER?tab=description
 */
 
-export const homeInitializer = () => (
-  facade: HomeFacade
-) => {}
+export const homeInitializer = (facade: HomeFacade) =>
+() => {
+  facade.fetchComplaints();
+}
 
 export const homeInitializerProvider: Provider = {
   provide: APP_INITIALIZER,
