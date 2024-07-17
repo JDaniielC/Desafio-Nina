@@ -1,5 +1,7 @@
 import { APP_INITIALIZER, Provider } from '@angular/core';
-import { HomeFacade } from './home.facade';
+import { Facade } from './app.facade';
+import { State } from './state/state';
+import { ComplaintsService } from './services/complaints.service';
 /*
 APP_INITIALIZER:
 
@@ -8,13 +10,16 @@ The provided functions are injected at application startup and executed during a
 See more: https://angular.dev/api/core/APP_INITIALIZER?tab=description
 */
 
-export const homeInitializer = () => (
-  facade: HomeFacade
-) => {}
+export const homeInitializer = (facade: Facade) =>
+() => {
+  console.log('Initializing app');
+  facade.fetchAllComplaints();
+  console.log('fecthing all complaints');
+}
 
 export const homeInitializerProvider: Provider = {
   provide: APP_INITIALIZER,
   useFactory: homeInitializer,
   multi: true,
-  deps: [HomeFacade],
+  deps: [Facade, State, ComplaintsService],
 }

@@ -27,6 +27,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "input": "src/assets",
+                "output": "/assets",
+                "glob": "**/*"
               }
             ],
             "styles": ["src/styles.scss"],
@@ -63,6 +68,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "front:build:production"
