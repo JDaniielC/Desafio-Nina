@@ -26,9 +26,46 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this.chartOptions.subscribe(res => {
       this.options = res;
-      this.options.dataLabels = {
-        enabled: false
-      };
+      this.options = {
+        ...this.options,
+        dataLabels: {
+          ...this.options.dataLabels,
+          enabled: false
+        },
+        title: {
+          ...this.options.title,
+          style: {
+            fontSize: '28px',
+            fontFamily: 'Poppins',
+            fontWeight: 600
+          }
+        },
+        xaxis: {
+          ...this.options.xaxis,
+          labels: {
+            ...this.options.xaxis?.labels,
+            style: {
+              fontSize: '12px',
+              fontFamily: 'Poppins',
+              fontWeight: 500
+            }
+          },
+        },
+        yaxis: {
+          ...this.options.yaxis,
+          labels: {
+            ...this.options.yaxis?.labels,
+            style: {
+              fontSize: '12px',
+              fontFamily: 'Poppins',
+              fontWeight: 500
+            },
+          }
+        },
+        colors: this.options.colors
+          ? this.options.colors
+          : ['#5B43D9', '#9886F2', '#C9BEFF', '#f1ECFF']
+      }
     });
   }
 
