@@ -47,8 +47,6 @@ def random_datetime(start_date, end_date):
     # Return formatted datetime string
     return random_datetime.strftime('%Y-%m-%dT%H:%M:%S')
 
-print()
-
 user_number = 100
 complaint_per_user = 3
 
@@ -95,7 +93,6 @@ for n in range(user_number):
     for c in range (complaint_per_user):
         new_complaint = generate_new_complaint(c, new_user['id'])
         complaints.append(new_complaint)
-        print(f"Appended complaint {new_complaint['id']}.")
         sleep(1)
     
 # Store data
