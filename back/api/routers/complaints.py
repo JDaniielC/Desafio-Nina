@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Optional
-from api.schemas.complaints import ComplaintSchema, ComplaintList, ComplaintUserSchema, ComplaintUserList
+from api.schemas.complaints import ComplaintList, ComplaintUserSchema, ComplaintUserList
 from api.schemas.group_bys import *
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException
 from api.database.database import client
 from http import HTTPStatus
 
@@ -18,7 +18,7 @@ def get_complaints(start_date: Optional[str] = None, end_date: Optional[str] = N
     complaints.sort(key=lambda x: x['id'])
     return {'complaints': complaints}
 
-@router.get('/{complaint_id}', response_model=ComplaintSchema)
+@router.get('/{complaint_id}', response_model=ComplaintUserSchema)
 def get_complaint(complaint_id: str):
     complaint = client.get_complaint(complaint_id)
     
