@@ -26,6 +26,9 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this.chartOptions.subscribe(res => {
       this.options = res;
+      this.options.dataLabels = {
+        enabled: false
+      };
     });
   }
 
