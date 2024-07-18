@@ -81,7 +81,7 @@ class Database:
     def insert_complaint(self):
         pass
 
-    def get_complaints(self):
+    def get_complaints(self, start_date: str = None, end_date: str = None):
         complaints_with_user_data = []
         users = { user['id']: user for user in self.users }
         
@@ -89,9 +89,13 @@ class Database:
             user_id = complaint['user_id']
             user = users[user_id]
 
-            for key, value in user.items():
+            for key, value in user.items(): 
                 complaint[f'user_{key}'] = value
 
+            complaint_date = datetime.strptime(complaint['date'], DATE_FORMAT)
+            if (start_date is not None and start_date > complaint_date
+                or end_date is not None and end_date < complaint_date):
+                continue
             complaints_with_user_data.append(complaint)
 
         return complaints_with_user_data

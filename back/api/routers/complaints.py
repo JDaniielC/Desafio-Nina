@@ -1,14 +1,20 @@
+from datetime import datetime
+from typing import Optional
 from api.schemas.complaints import ComplaintSchema, ComplaintList, ComplaintUserSchema, ComplaintUserList
 from api.schemas.group_bys import *
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from api.database.database import client
 from http import HTTPStatus
 
 router = APIRouter(prefix='/complaints', tags=['complaints'])
 
 @router.get('/', response_model=ComplaintUserList)
-def get_complaints():
-    complaints = client.get_complaints()
+def get_complaints(start_date: Optional[str] = None, end_date: Optional[str] = None):
+    if (start_date):
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    if (end_date):
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    complaints = client.get_complaints(start_date, end_date)
     complaints.sort(key=lambda x: x['id'])
     return {'complaints': complaints}
 
