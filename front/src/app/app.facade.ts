@@ -60,7 +60,6 @@ export class Facade {
     }),
     this.complaintsService.getComplaintsNeighborhoodGroup().subscribe(res => {
       this.state.setComplaintsNeighborhood(res);
-      console.log(res)
     })
   }
 

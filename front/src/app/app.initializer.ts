@@ -12,9 +12,7 @@ See more: https://angular.dev/api/core/APP_INITIALIZER?tab=description
 
 export const homeInitializer = (facade: Facade) =>
 () => {
-  console.log('Initializing app');
   facade.fetchAllComplaints();
-  console.log('fecthing all complaints');
 }
 
 export const homeInitializerProvider: Provider = {
