@@ -78,33 +78,42 @@ class Database:
 
         return month_name
 
+    def _get_user_data_to_complaint(self, complaint: dict):
+        user_id = complaint['user_id']
+        user = self.get_user(user_id)
+        for key, value in user.items(): 
+            complaint[f'user_{key}'] = value
+        return complaint
+
+
     def insert_complaint(self):
         pass
 
-    def get_complaints(self):
+    def get_complaints(self, start_date: str = None, end_date: str = None):
         complaints_with_user_data = []
-        users = { user['id']: user for user in self.users }
         
         for complaint in self.complaints:
-            user_id = complaint['user_id']
-            user = users[user_id]
+            complaint = self._get_user_data_to_complaint(complaint)
 
-            for key, value in user.items():
-                complaint[f'user_{key}'] = value
-
+            complaint_date = datetime.strptime(complaint['date'], DATE_FORMAT)
+            if (start_date is not None and start_date > complaint_date
+                or end_date is not None and end_date < complaint_date):
+                continue
             complaints_with_user_data.append(complaint)
 
         return complaints_with_user_data
 
-    def get_complaint(self, _id: str = None):
-        # TODO Implement a way to add the user data to the complaint,
-        # using the fields "complaint.user_id" and "user.id".
-        # Some functions won't work without this.
-        # Hint: Pay attention to the schemas when returning!
+    def get_complaint(self, _id: str = None, user_id: str = None):
+        if _id is not None:
+            result = list(filter(lambda x: x['id'] == _id, self.complaints))
+            if (len(result) > 0):
+                return self._get_user_data_to_complaint(result[0])
 
-        result = list(filter(lambda x: x['id'] == _id, self.complaints))
-        if len(result) > 0:
-            return result[0]
+        if user_id is not None:
+            result = list(filter(lambda x: x['user_id'] == user_id, self.complaints))
+            if (len(result) > 0):
+                return result
+        
         return None
     
     def group_by(self, complaint_key: str):
