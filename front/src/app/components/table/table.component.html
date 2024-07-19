@@ -17,4 +17,30 @@
       </td>
     </tr>
   </tbody>
+
+  <tfoot>
+    <button type="button" [disabled]="currentPage === 1">
+      <img
+        src="../../../assets/chevron-left.svg"
+        alt="Voltar"
+      >
+    </button>
+    <div class="page-buttons">
+      @for (page of _pageButtons; track $index) {
+        @if (page == null) {
+          <span>...</span>
+        } @else {
+          <button
+            [ngClass]="currentPage - 1 == page ? 'active' : ''"
+            (click)="changePage(page + 1)"
+          >
+            {{ page + 1 }}
+          </button>
+        }
+      }
+    </div>
+    <button type="button" [disabled]="currentPage === totalPages">
+      <img src="../../../assets/chevron-right.svg" alt="Avançar">
+    </button>
+  </tfoot>
 </table>
