@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Complaint } from '../../types/complaints';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 })
 export class TableComponent implements OnInit {
   @Input() complaintObservable!: Observable<Complaint[]>;
+  @Output() selectComplaintEvent = new EventEmitter<string>();
 
   complaints: Complaint[] = [];
   pageItems: Complaint[][] = [];
@@ -31,6 +32,10 @@ export class TableComponent implements OnInit {
       this.complaints = this.pageItems[0];
       this.totalPages = this.pageItems.length;
     });
+  }
+
+  selectComplaint(complaintId: string) {
+    this.selectComplaintEvent.emit(complaintId);
   }
 
   createPageItems(complaints: Complaint[]): Complaint[][] {
