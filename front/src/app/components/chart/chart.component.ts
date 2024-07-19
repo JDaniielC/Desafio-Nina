@@ -32,6 +32,7 @@ export class ChartComponent implements OnInit {
           ...this.options.chart,
           fontFamily: 'Poppins',
           foreColor: '#B6B5BB',
+          height: 380,
           toolbar: {
             ...this.options.chart?.toolbar,
             show: false
@@ -56,10 +57,14 @@ export class ChartComponent implements OnInit {
           labels: {
             ...this.options.xaxis?.labels,
             style: {
-              ...this.options.xaxis?.labels?.style,
-              fontSize: '12px',
-              fontFamily: 'Poppins',
-              fontWeight: 500
+              ...this.options.xaxis?.labels?.style
+              ? this.options.xaxis?.labels?.style
+              : {
+                fontSize: '12px',
+                fontFamily: 'Poppins',
+                fontWeight: 500,
+                colors: '#000'
+              }
             }
           },
         },
@@ -68,10 +73,14 @@ export class ChartComponent implements OnInit {
           labels: {
             ...this.options.yaxis?.labels,
             style: {
-              ...this.options.yaxis?.labels?.style,
-              fontSize: '12px',
-              fontFamily: 'Poppins',
-              fontWeight: 500
+              ...this.options.yaxis?.labels?.style
+              ? this.options.xaxis?.labels?.style
+              : {
+                fontSize: '12px',
+                fontFamily: 'Poppins',
+                fontWeight: 500,
+                colors: '#000'
+              }
             },
           }
         },
