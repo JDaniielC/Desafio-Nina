@@ -1,0 +1,46 @@
+<table>
+  <thead>
+    <tr>
+      <th>Identificador</th>
+      <th>Bairro</th>
+      <th>Data do ocorrido</th>
+      <th>Tipo de agressão</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of complaints" (click)="selectComplaint(item.id)">
+      <td>{{ item.id }}</td>
+      <td>{{ item.neighborhood }}</td>
+      <td>{{ item.date | date: 'dd/MM/yy' }}</td>
+      <td>
+        <span class="chip">{{ item.type | translate }}</span>
+      </td>
+    </tr>
+  </tbody>
+
+  <tfoot>
+    <button type="button" [disabled]="currentPage === 1">
+      <img
+        src="../../../assets/chevron-left.svg"
+        alt="Voltar"
+      >
+    </button>
+    <div class="page-buttons">
+      @for (page of _pageButtons; track $index) {
+        @if (page == null) {
+          <span>...</span>
+        } @else {
+          <button
+            [ngClass]="currentPage - 1 == page ? 'active' : ''"
+            (click)="changePage(page + 1)"
+          >
+            {{ page + 1 }}
+          </button>
+        }
+      }
+    </div>
+    <button type="button" [disabled]="currentPage === totalPages">
+      <img src="../../../assets/chevron-right.svg" alt="Avançar">
+    </button>
+  </tfoot>
+</table>

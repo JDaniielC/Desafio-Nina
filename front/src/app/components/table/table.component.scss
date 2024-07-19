@@ -1,0 +1,132 @@
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 .5rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-bottom: 3rem;
+
+  thead {
+    color: var(--gray-color);
+  }
+
+  td {
+    padding: 0.75rem;
+    text-align: left;
+    border: solid 1px var(--gray-lighter);
+    border-style: solid none;
+
+    .chip {
+      color: var(--primary-color);
+      background-color: var(--primary-light);
+      padding: 0.25rem 0.5rem;
+      border-radius: 1rem;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  }
+
+  td:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    font-weight: 500;
+  }
+  td:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  th {
+    vertical-align: bottom;
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  tbody {
+    tr {
+      background-color: var(--gray-lighter);
+      border-radius: 1rem;
+      margin: .2rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    tr:hover {
+      background-color: var(--gray-secondary);
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--gray-light);
+    }
+
+    tr:nth-child(even):hover {
+      background-color: var(--gray-secondary);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+  }
+
+  tfoot {
+    display: flex;
+    height: 2rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 0;
+
+    .page-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      button {
+        padding: .3rem .6rem;
+        border-radius: 0.25rem;
+        background-color: var(--primary-lighter);
+        color: var(--black-color);
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &.active {
+          background-color: var(--primary-color);
+          color: var(--white-color)
+        }
+
+        :hover {
+          background-color: var(--primary-color);
+        }
+      }
+    }
+
+    button {
+      appearance: none;
+      border: none;
+      background-color: transparent;
+
+      img {
+        width: 1.3rem;
+        height: 1.3 rem;
+        margin: 0 0.5rem;
+        cursor: pointer;
+      }
+
+      :disabled {
+        opacity: 0.5;
+        user-select: none;
+      }
+
+      :hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
+}

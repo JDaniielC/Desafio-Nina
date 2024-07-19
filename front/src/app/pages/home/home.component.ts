@@ -3,6 +3,7 @@ import { Facade } from '../../app.facade';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ChartOptions } from '../../types/apexchart';
 import {
+  Complaint,
   ComplaintsAgeGroup,
   ComplaintsAtMoment,
   ComplaintsGenderGroup,
@@ -12,11 +13,13 @@ import {
 } from '../../types/complaints';
 import { ChartComponent } from '../../components/chart/chart.component';
 import { ChartsGalleryComponent } from '../../components/charts-gallery/charts-gallery.component';
+import { TableComponent } from '../../components/table/table.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ChartComponent, ChartsGalleryComponent],
+  imports: [ChartComponent, ChartsGalleryComponent, TableComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -36,11 +39,13 @@ export class HomeComponent implements OnInit {
   neighborhoodGroupObservable: Observable<ComplaintsNeighborhood[]>;
   monthGroupObservable: Observable<ComplaintsMonthGroup>;
   momentGroupObservable: Observable<ComplaintsAtMoment>;
+  complaintsListObservable: Observable<Complaint[]>;
 
-  constructor(private readonly facade: Facade) {
+  constructor(private readonly facade: Facade, private readonly router: Router) {
     this.neighborhoodGroupObservable = facade.getComplaintsNeighborhood()
     this.monthGroupObservable = facade.getComplaintsMonthGroup()
     this.momentGroupObservable = facade.getComplaintsAtMoment()
+    this.complaintsListObservable = facade.getComplaintsList()
   }
 
   ngOnInit() {
@@ -56,6 +61,10 @@ export class HomeComponent implements OnInit {
       this.typeGroupChartData.next(this.createTypeGroupChart
       (res))
     })
+  }
+
+  selectComplaint(complaintId: string) {
+    this.router.navigate(['/detail', complaintId])
   }
 
   createTypeGroupChart(data: ComplaintsTypeGroup): ChartOptions {
