@@ -28,6 +28,15 @@ export class ChartComponent implements OnInit {
       this.options = res;
       this.options = {
         ...this.options,
+        chart: {
+          ...this.options.chart,
+          fontFamily: 'Poppins',
+          foreColor: '#B6B5BB',
+          toolbar: {
+            ...this.options.chart?.toolbar,
+            show: false
+          }
+        },
         dataLabels: {
           ...this.options.dataLabels
           ? this.options.dataLabels
