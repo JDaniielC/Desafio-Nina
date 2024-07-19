@@ -11,9 +11,9 @@ export interface Complaint {
   description: string,
   created_at: string,
   updated_at: string,
-}
 
-export type ComplaintsType = Complaint & User;
+  user: User
+}
 
 export interface ComplaintsTypeGroup {
   groping: number;
@@ -69,8 +69,19 @@ export interface ComplaintsNeighborhood {
 
 // Responses from API
 
+export interface GetComplaintResponse extends Complaint {
+  user_name: string;
+  user_email: string;
+  user_phone_number: string;
+  user_created_at: string;
+  user_updated_at: string;
+  user_gender: string;
+  user_ethnicity: string;
+  user_birthdate: string;
+}
+
 export interface GetComplaintsResponse {
-  complaints: ComplaintsType[];
+  complaints: GetComplaintResponse[];
 }
 
 export interface GetComplaintsGenderGroupResponse {

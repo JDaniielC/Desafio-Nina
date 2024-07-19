@@ -13,6 +13,7 @@ import {
   getComplaintsTypeGroupResponse,
   GetComplaintsMonthGroupResponse,
   GetComplaintsGenderGroupResponse,
+  GetComplaintResponse,
 } from '../types/complaints';
 import { first, map } from 'rxjs';
 
@@ -26,11 +27,43 @@ export class ComplaintsService {
   getComplaints() {
     return this.http.get<GetComplaintsResponse>(
       '/api/complaints'
-    ).pipe(first(), map((response) => response.complaints))
+    ).pipe(first(), map(
+      (response): Complaint[] => response.complaints.map(el => (
+      {...el,
+        user: {
+          id: el.user_id,
+          name: el.user_name,
+          email: el.user_email,
+          phone_number: el.user_phone_number,
+          created_at: el.user_created_at,
+          updated_at: el.user_updated_at,
+          birthdate: el.user_birthdate,
+          ethnicity: el.user_ethnicity,
+          gender: el.user_gender
+        }
+      }
+    ))))
   }
 
   getComplaint(id: string) {
-    return this.http.get<Complaint>(`/api/complaints/${id}`).pipe(first())
+    return this.http.get<GetComplaintResponse>(
+      `/api/complaints/${id}`
+    ).pipe(first(), map((response): Complaint => (
+      {
+        ...response,
+        user: {
+          id: response.user_id,
+          name: response.user_name,
+          email: response.user_email,
+          phone_number: response.user_phone_number,
+          created_at: response.user_created_at,
+          updated_at: response.user_updated_at,
+          gender: response.user_gender,
+          ethnicity: response.user_ethnicity,
+          birthdate: response.user_birthdate
+        }
+      }
+    )))
   }
 
   getComplaintsTypeGroup() {

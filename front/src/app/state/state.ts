@@ -7,7 +7,6 @@ import {
   ComplaintsGenderGroup,
   ComplaintsMonthGroup,
   ComplaintsNeighborhood,
-  ComplaintsType,
   ComplaintsTypeGroup,
   DEFAULT_COMPAINTS_GENDER_GROUP,
   DEFAULT_COMPLAINTS_AGE_GROUP,
@@ -21,7 +20,7 @@ import {
 export class State {
   constructor() {}
 
-  private readonly complaintsList = new BehaviorSubject<ComplaintsType[]>([]);
+  private readonly complaintsList = new BehaviorSubject<Complaint[]>([]);
 
   private readonly complaintsTypeGroup = new BehaviorSubject<ComplaintsTypeGroup>(
     DEFAULT_COMPLAINTS_TYPE_GROUP
@@ -63,7 +62,7 @@ export class State {
     return this.complaintsList.asObservable();
   }
 
-  setComplaintsList(complaints: ComplaintsType[]) {
+  setComplaintsList(complaints: Complaint[]) {
     this.complaintsList.next(complaints);
   }
 

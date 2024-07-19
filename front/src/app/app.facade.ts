@@ -39,6 +39,10 @@ export class Facade {
     return this.state.getComplaintsNeighborhood();
   }
 
+  getComplaint() {
+    return this.state.getComplaint();
+  }
+
   fetchAllComplaints() {
     this.complaintsService.getComplaints().subscribe(res => {
       this.state.setComplaintsList(res);
