@@ -1,0 +1,11 @@
+.simple-card {
+  padding: 1rem 2rem;
+  background-color: var(--gray-lighter);
+  border-radius: 1rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
