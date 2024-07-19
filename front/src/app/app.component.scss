@@ -1,0 +1,13 @@
+header {
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary-color);
+
+  img {
+    transform: scale(.7)
+  }
+}
+
+main {
+  padding: 2rem 3rem
+}

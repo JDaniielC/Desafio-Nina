@@ -7,5 +7,6 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin-top: 1rem;
   gap: 1rem;
 }
