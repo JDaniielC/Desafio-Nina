@@ -1,0 +1,28 @@
+<div id="gallery-card">
+  <div class="gallery-pagination">
+    <button
+      class="gallery-pagination-button"
+      (click)="prevChart()"
+      [disabled]="options[0]"
+    >
+      <img src="../../../assets/chevron-left-solid.svg" alt="Voltar">
+    </button>
+    <div class="circles-pagination">
+      @for (option of options; track $index) {
+        <div
+          [classList]="option ? 'circle-pagination active' : 'circle-pagination'"
+          (click)="toggleChart($index)"
+        ></div>
+      }
+    </div>
+    <button
+      class="gallery-pagination-button"
+      (click)="nextChart()"
+      [disabled]="options[2]"
+    >
+      <img
+        src="../../../assets/chevron-right-solid.svg"
+        alt="Voltar">
+    </button>
+  </div>
+</div>
