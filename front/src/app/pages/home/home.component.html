@@ -23,3 +23,8 @@
     ></app-chart>
   </div>
 </div>
+
+<app-table
+  [complaintObservable]="complaintsListObservable"
+  (selectComplaintEvent)="selectComplaint($event)"
+></app-table>
