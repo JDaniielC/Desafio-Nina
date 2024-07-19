@@ -35,6 +35,7 @@ export class ChartComponent implements OnInit {
         title: {
           ...this.options.title,
           style: {
+            ...this.options.title?.style,
             fontSize: '28px',
             fontFamily: 'Poppins',
             fontWeight: 600
@@ -45,6 +46,7 @@ export class ChartComponent implements OnInit {
           labels: {
             ...this.options.xaxis?.labels,
             style: {
+              ...this.options.xaxis?.labels?.style,
               fontSize: '12px',
               fontFamily: 'Poppins',
               fontWeight: 500
@@ -56,6 +58,7 @@ export class ChartComponent implements OnInit {
           labels: {
             ...this.options.yaxis?.labels,
             style: {
+              ...this.options.yaxis?.labels?.style,
               fontSize: '12px',
               fontFamily: 'Poppins',
               fontWeight: 500
@@ -64,7 +67,7 @@ export class ChartComponent implements OnInit {
         },
         colors: this.options.colors
           ? this.options.colors
-          : ['#5B43D9', '#9886F2', '#C9BEFF', '#f1ECFF']
+          : ['#5B43D9', '#9886F2', '#C9BEFF', '#B6B5BB']
       }
     });
   }
