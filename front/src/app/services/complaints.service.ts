@@ -68,9 +68,20 @@ export class ComplaintsService {
   }
 
   getComplaintsAgeGroup() {
-    return this.http.get<ComplaintsAgeGroup>(
+    return this.http.get<any>(
       '/api/complaints/group/age_group'
-    ).pipe(first())
+    ).pipe(first(), map(res => {
+      const newReturn: ComplaintsAgeGroup = {
+        under_14: res['< 14'],
+        from_14_to_18: res['14 - 18'],
+        from_19_to_29: res['19 - 29'],
+        from_30_to_39: res['30 - 39'],
+        from_40_to_49: res['40 - 49'],
+        from_50_to_59: res['50 - 59'],
+        above_60: res['> 60']
+      }
+      return newReturn
+    }))
   }
 
   getComplaintsAtMoment() {

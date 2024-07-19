@@ -1,0 +1,40 @@
+<div id="gallery-card">
+  @if (showMomentChart) {
+    <h3>Momento do relato</h3>
+    <div class="flex">
+      <app-chart [chartOptions]="momentChartData"></app-chart>
+      <app-chart [chartOptions]="afterChartData"></app-chart>
+    </div>
+  } @else if (showMonthGroupChart) {
+    <app-chart [chartOptions]="monthGroupChartData"></app-chart>
+  } @else if (showNeighborhoodChart) {
+    <app-chart [chartOptions]="neighborhoodChartData"></app-chart>
+  }
+
+  <div class="gallery-pagination">
+    <button
+      class="gallery-pagination-button"
+      (click)="prevChart()"
+      [disabled]="options[0]"
+    >
+      <img src="../../../assets/chevron-left-solid.svg" alt="Voltar">
+    </button>
+    <div class="circles-pagination">
+      @for (option of options; track $index) {
+        <div
+          [classList]="option ? 'circle-pagination active' : 'circle-pagination'"
+          (click)="toggleChart($index)"
+        ></div>
+      }
+    </div>
+    <button
+      class="gallery-pagination-button"
+      (click)="nextChart()"
+      [disabled]="options[2]"
+    >
+      <img
+        src="../../../assets/chevron-right-solid.svg"
+        alt="Voltar">
+    </button>
+  </div>
+</div>
