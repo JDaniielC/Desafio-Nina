@@ -62,7 +62,7 @@ def generate_new_user(user_num: int):
         'phone_number': "8191234" + user_num_str,
         'birthdate': random_datetime(BIRTH_START_DATE, BIRTH_END_DATE),
         'gender': random_from_list(['CIS_MALE', 'CIS_FEMALE', 'TRANS_MALE', 'TRANS_FEMALE', 'OTHER']),
-        'ethnicity': random_from_list(['BLACK', 'BROWN', 'WHITE', 'WHITE', 'OTHER']),
+        'ethnicity': random_from_list(['BLACK', 'BROWN', 'WHITE', 'OTHER']),
         'created_at': datetime.now().strftime('%Y-%m-%dT%H:%M:%S'),
         'updated_at': datetime.now().strftime('%Y-%m-%dT%H:%M:%S'),
     }
