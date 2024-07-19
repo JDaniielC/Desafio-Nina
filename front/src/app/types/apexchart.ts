@@ -10,7 +10,8 @@ import {
   ApexTooltip,
   ApexLegend,
   ApexYAxis,
-  ApexGrid
+  ApexGrid,
+  ApexFill
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -27,4 +28,5 @@ export type ChartOptions = {
   colors?: any;
   yaxis?: ApexYAxis;
   grid?: ApexGrid;
+  fill?: ApexFill
 };

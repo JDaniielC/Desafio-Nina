@@ -29,8 +29,9 @@ export class ChartComponent implements OnInit {
       this.options = {
         ...this.options,
         dataLabels: {
-          ...this.options.dataLabels,
-          enabled: false
+          ...this.options.dataLabels
+          ? this.options.dataLabels
+          : { enabled: false },
         },
         title: {
           ...this.options.title,
