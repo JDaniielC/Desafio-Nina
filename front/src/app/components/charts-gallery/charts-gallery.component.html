@@ -1,4 +1,16 @@
 <div id="gallery-card">
+  @if (showMomentChart) {
+    <h3>Momento do relato</h3>
+    <div class="flex">
+      <app-chart [chartOptions]="momentChartData"></app-chart>
+      <app-chart [chartOptions]="afterChartData"></app-chart>
+    </div>
+  } @else if (showMonthGroupChart) {
+    <app-chart [chartOptions]="monthGroupChartData"></app-chart>
+  } @else if (showNeighborhoodChart) {
+    <app-chart [chartOptions]="neighborhoodChartData"></app-chart>
+  }
+
   <div class="gallery-pagination">
     <button
       class="gallery-pagination-button"

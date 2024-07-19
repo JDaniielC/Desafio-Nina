@@ -5,6 +5,26 @@
   gap: 1rem;
   border-radius: 1rem;
   background-color: var(--primary-color);
+  height: 100%;
+
+  h3 {
+    color: var(--white-color);
+    margin-left: 1rem;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+
+    app-chart {
+      flex: 1;
+      ::ng-deep .apexcharts-datalabel-value {
+        fill: var(--white-color)
+      }
+    }
+  }
 
   .gallery-pagination {
     display: flex;
