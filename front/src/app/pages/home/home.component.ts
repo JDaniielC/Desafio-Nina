@@ -9,17 +9,21 @@ import {
   ComplaintsGenderGroup,
   ComplaintsMonthGroup,
   ComplaintsNeighborhood,
-  ComplaintsTypeGroup
+  ComplaintsTypeGroup,
+  GetComplaintsRequest
 } from '../../types/complaints';
 import { ChartComponent } from '../../components/chart/chart.component';
 import { ChartsGalleryComponent } from '../../components/charts-gallery/charts-gallery.component';
 import { TableComponent } from '../../components/table/table.component';
 import { Router } from '@angular/router';
+import { DatepickerComponent } from '../../components/datepicker/datepicker.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ChartComponent, ChartsGalleryComponent, TableComponent],
+  imports: [
+    ChartComponent, ChartsGalleryComponent, TableComponent, DatepickerComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -61,6 +65,10 @@ export class HomeComponent implements OnInit {
       this.typeGroupChartData.next(this.createTypeGroupChart
       (res))
     })
+  }
+
+  fetchComplaints(dates?: GetComplaintsRequest) {
+    this.facade.fetchComplaints(dates)
   }
 
   selectComplaint(complaintId: string) {

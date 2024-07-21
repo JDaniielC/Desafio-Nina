@@ -26,7 +26,11 @@
   </div>
 </div>
 
-<app-table
-  [complaintObservable]="complaintsListObservable"
-  (selectComplaintEvent)="selectComplaint($event)"
-></app-table>
+<div class="dashboard-table">
+  <h3>Ocorrências</h3>
+  <app-datepicker (applyDateRange)="fetchComplaints($event)"></app-datepicker>
+  <app-table
+    [complaintObservable]="complaintsListObservable"
+    (selectComplaintEvent)="selectComplaint($event)"
+  ></app-table>
+</div>
