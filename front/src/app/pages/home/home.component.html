@@ -1,36 +1,54 @@
-<h2>Dashboard</h2>
+<div *ngIf="!(isLoading | async); else dashboardSkeleton">
+  <h2>Dashboard</h2>
+  <div class="dashboard-grid">
+    <app-charts-gallery
+      [momentDataObservable]="momentGroupObservable"
+      [monthGroupDataObservable]="monthGroupObservable"
+      [neighborhoodDataObservable]="neighborhoodGroupObservable"
+    ></app-charts-gallery>
 
-<div class="dashboard-grid">
-  <app-charts-gallery
-    [momentDataObservable]="momentGroupObservable"
-    [monthGroupDataObservable]="monthGroupObservable"
-    [neighborhoodDataObservable]="neighborhoodGroupObservable"
-  ></app-charts-gallery>
+    <div class="simple-card">
+      <app-chart
+        [chartOptions]="typeGroupChartData"
+      ></app-chart>
+    </div>
 
-  <div class="simple-card">
-    <app-chart
-      [chartOptions]="typeGroupChartData"
-    ></app-chart>
+    <div class="simple-card">
+      <app-chart
+        [chartOptions]="genderGroupChartData"
+      ></app-chart>
+    </div>
+
+    <div class="simple-card">
+      <app-chart
+        [chartOptions]="ageGroupChartData"
+      ></app-chart>
+    </div>
   </div>
 
-  <div class="simple-card">
-    <app-chart
-      [chartOptions]="genderGroupChartData"
-    ></app-chart>
-  </div>
-
-  <div class="simple-card">
-    <app-chart
-      [chartOptions]="ageGroupChartData"
-    ></app-chart>
+  <div class="dashboard-table">
+    <h3>Ocorrências</h3>
+    <app-datepicker (applyDateRange)="fetchComplaints($event)"></app-datepicker>
+    <app-table
+      [complaintObservable]="complaintsListObservable"
+      (selectComplaintEvent)="selectComplaint($event)"
+    ></app-table>
   </div>
 </div>
 
-<div class="dashboard-table">
-  <h3>Ocorrências</h3>
-  <app-datepicker (applyDateRange)="fetchComplaints($event)"></app-datepicker>
-  <app-table
-    [complaintObservable]="complaintsListObservable"
-    (selectComplaintEvent)="selectComplaint($event)"
-  ></app-table>
-</div>
+<ng-template #dashboardSkeleton>
+  <h2>Dashboard</h2>
+
+  <div class="dashboard-grid">
+    <ngx-skeleton-loader [theme]="{ 'height.rem': 20 }"/>
+    <ngx-skeleton-loader [theme]="{ 'height.rem': 20 }"/>
+    <ngx-skeleton-loader [theme]="{ 'height.rem': 20 }"/>
+    <ngx-skeleton-loader [theme]="{ 'height.rem': 20 }"/>
+  </div>
+
+  <div class="dashboard-table">
+    <h3>Ocorrências</h3>
+    <app-datepicker (applyDateRange)="fetchComplaints($event)"></app-datepicker>
+    <ngx-skeleton-loader [theme]="{ 'height.rem': 30 }"/>
+  </div>
+</ng-template>

@@ -17,17 +17,26 @@ import { ChartsGalleryComponent } from '../../components/charts-gallery/charts-g
 import { TableComponent } from '../../components/table/table.component';
 import { Router } from '@angular/router';
 import { DatepickerComponent } from '../../components/datepicker/datepicker.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    ChartComponent, ChartsGalleryComponent, TableComponent, DatepickerComponent
+    CommonModule,
+    ChartComponent,
+    ChartsGalleryComponent,
+    TableComponent,
+    DatepickerComponent,
+    NgxSkeletonLoaderModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  isLoading: Observable<boolean> = new BehaviorSubject(false);
+
   genderGroupChartData: BehaviorSubject<
     ChartOptions
   > = new BehaviorSubject({} as ChartOptions);
@@ -65,6 +74,8 @@ export class HomeComponent implements OnInit {
       this.typeGroupChartData.next(this.createTypeGroupChart
       (res))
     })
+
+    this.isLoading = this.facade.getLoading()
   }
 
   fetchComplaints(dates?: GetComplaintsRequest) {
