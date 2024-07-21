@@ -1,0 +1,61 @@
+<div class="title">
+  <button routerLink="/">
+    <img src="../../../assets/chevron-left.svg" alt="voltar">
+  </button>
+  <h3>Ocorrência ID{{complaint.id}} - {{complaint.date | date: 'dd/MM/yy'}}</h3>
+</div>
+
+<main>
+  <div class="dates-container">
+    <div class="dates">
+      <p>Ocorrido em</p>
+      <p class="chip">
+        {{ complaint.date | date: 'dd/MM/yy - hh:mm' }}
+      </p>
+    </div>
+    <div class="dates">
+      <p>Data do registro</p>
+      <p class="chip">
+        {{ complaint.created_at | date: 'dd/MM/yy - hh:mm' }}
+      </p>
+    </div>
+  </div>
+
+  <div class="details" *ngIf="complaint.user">
+    <h4>Detalhes</h4>
+    <div class="infos">
+      <div class="info">
+        <h5>Situação</h5>
+        <p>{{ complaint.situation | translate }}</p>
+      </div>
+      <div class="info">
+        <h5>Gênero</h5>
+        <p>{{ complaint.user.gender | translate }}</p>
+      </div>
+      <div class="info">
+        <h5>Etinia</h5>
+        <p>{{ complaint.user.ethnicity | translate }}</p>
+      </div>
+      <div class="info">
+        <h5>Idade</h5>
+        <p>{{ complaint.user.birthdate | age }}</p>
+      </div>
+      <div class="info">
+        <h5>Bairro</h5>
+        <p>{{ complaint.neighborhood }}</p>
+      </div>
+    </div>
+    <div>
+      <h5>Relato</h5>
+      <div class="detail">
+        {{ complaint.description }}
+      </div>
+    </div>
+    <div>
+      <h6>Tipo de agressão</h6>
+      <p class="chip">
+        {{ complaint.type | translate }}
+      </p>
+    </div>
+  </div>
+</main>

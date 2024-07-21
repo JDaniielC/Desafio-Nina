@@ -1,4 +1,4 @@
-from back.routers import users, complaints
+from .routers import users, complaints
 from fastapi import FastAPI
 from http import HTTPStatus
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,8 +13,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(users.router)
-app.include_router(complaints.router)
+app.include_router(users.router, prefix='/api')
+app.include_router(complaints.router, prefix='/api')
 
 @app.get('/', status_code=HTTPStatus.OK)  
 def read_root():  

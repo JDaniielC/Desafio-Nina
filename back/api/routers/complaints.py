@@ -1,18 +1,24 @@
-from back.schemas.complaints import ComplaintSchema, ComplaintList, ComplaintUserSchema, ComplaintUserList
-from back.schemas.group_bys import *
+from datetime import datetime
+from typing import Optional
+from api.schemas.complaints import ComplaintList, ComplaintUserSchema, ComplaintUserList
+from api.schemas.group_bys import *
 from fastapi import APIRouter, HTTPException
-from back.database.database import client
+from api.database.database import client
 from http import HTTPStatus
 
 router = APIRouter(prefix='/complaints', tags=['complaints'])
 
 @router.get('/', response_model=ComplaintUserList)
-def get_complaints():
-    complaints = client.get_complaints()
+def get_complaints(start_date: Optional[str] = None, end_date: Optional[str] = None):
+    if (start_date):
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+    if (end_date):
+        end_date = datetime.strptime(end_date, '%Y-%m-%d')
+    complaints = client.get_complaints(start_date, end_date)
     complaints.sort(key=lambda x: x['id'])
     return {'complaints': complaints}
 
-@router.get('/{complaint_id}', response_model=ComplaintSchema)
+@router.get('/{complaint_id}', response_model=ComplaintUserSchema)
 def get_complaint(complaint_id: str):
     complaint = client.get_complaint(complaint_id)
     
@@ -21,9 +27,14 @@ def get_complaint(complaint_id: str):
 
     return complaint
 
-# @router.get('/user/{user_id}', response_model=ComplaintList)
-# def get_complaints_from_user(user_id: str):
-#     # Implement your function here!
+@router.get('/user/{user_id}', response_model=ComplaintList)
+def get_complaints_from_user(user_id: str):
+    complaint = client.get_complaint(None, user_id)
+
+    if complaint is None:
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Complaints not found.")
+
+    return {'complaints': complaint}
 
 @router.get('/group/types', response_model=GroupByTypes)
 def get_complaints_group_by_types():

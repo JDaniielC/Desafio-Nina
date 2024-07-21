@@ -1,0 +1,24 @@
+<h4>Filtros</h4>
+<h5 class="filter-name">Intervalo</h5>
+
+<div class="datepicker-container">
+  <input
+    type="text"
+    ngxDaterangepickerMd
+    placeholder="Selecione um intervalo"
+    [locale]="locale"
+    [autoApply]="true"
+    [(ngModel)]="selected"
+  />
+
+  <button
+    type="button"
+    class="clear-btn"
+    (click)="clearDate()"
+  >Limpar</button>
+  <button
+    type="button"
+    class="apply-btn"
+    (click)="applyDate()"
+  >Filtrar</button>
+</div>
