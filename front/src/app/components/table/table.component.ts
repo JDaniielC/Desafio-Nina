@@ -19,7 +19,7 @@ export class TableComponent implements OnInit {
   pageItems: Complaint[][] = [];
   pageButtons: (number | null)[] = []
 
-  ITEMS_PER_PAGE = 10;
+  ITEMS_PER_PAGE = 6;
   currentPage = 1;
   totalPages = 0;
   TOTAL_BUTTONS = 7

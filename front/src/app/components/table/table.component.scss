@@ -5,7 +5,6 @@ table {
   margin-bottom: 1rem;
   background-color: #fff;
   border-radius: 0.25rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
   position: relative;
   padding-bottom: 3rem;
   font-size: 1rem;
@@ -113,20 +112,25 @@ table {
       border: none;
       background-color: transparent;
 
+      &:disabled {
+        opacity: 0.2;
+        cursor: default;
+
+        img {
+          user-select: none;
+          cursor: default;
+        }
+      }
+
+      :hover {
+        filter: brightness(0.8);
+      }
+
       img {
         width: 1.3rem;
         height: 1.3 rem;
         margin: 0 0.5rem;
         cursor: pointer;
-      }
-
-      :disabled {
-        opacity: 0.5;
-        user-select: none;
-      }
-
-      :hover {
-        filter: brightness(0.8);
       }
     }
   }
