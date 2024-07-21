@@ -9,6 +9,7 @@
 
   .chart {
     animation: fadeIn 1s;
+    height: 100%;
   }
 
   h3 {
@@ -32,7 +33,6 @@
 
   .gallery-pagination {
     display: flex;
-    width: 10rem;
     align-items: center;
     margin: auto;
 
