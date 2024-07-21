@@ -36,8 +36,8 @@ export class State {
   );
 
   private readonly complaintsAtMoment = new BehaviorSubject<ComplaintsAtMoment>({
-    false: 0,
-    true: 0,
+    false: 1,
+    true: 1,
   });
 
   private readonly complaintsMonthGroup = new BehaviorSubject<ComplaintsMonthGroup>(

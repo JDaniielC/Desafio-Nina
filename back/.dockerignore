@@ -1,0 +1,7 @@
+venv
+Dockerfile
+.dockerignore
+.git
+.gitignore
+poetry.lock
+__pycache__
