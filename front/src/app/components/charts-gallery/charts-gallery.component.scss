@@ -7,6 +7,10 @@
   background-color: var(--primary-color);
   height: 100%;
 
+  .chart {
+    animation: fadeIn 1s;
+  }
+
   h3 {
     color: var(--white-color);
     margin-left: 1rem;
@@ -79,5 +83,14 @@
         }
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
