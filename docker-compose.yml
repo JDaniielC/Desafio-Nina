@@ -16,7 +16,7 @@ services:
       context: ./front
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "80:80"
     volumes:
       - ./front:/usr/app/front
     image: nina/frontend
@@ -25,4 +25,3 @@ services:
     
 networks:
   nina-network:
-    driver: bridge
