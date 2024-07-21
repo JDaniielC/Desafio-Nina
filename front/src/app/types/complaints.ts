@@ -164,3 +164,10 @@ export const DEFAULT_MONTH_GROUP: ComplaintsMonthGroup = {
   nov: 0,
   dec: 0,
 };
+
+// Requests
+
+export interface GetComplaintsRequest {
+  startDate: string;
+  endDate: string;
+}
