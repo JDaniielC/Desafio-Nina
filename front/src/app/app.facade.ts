@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State } from './state/state';
 import { ComplaintsService } from './services/complaints.service';
+import { GetComplaintsRequest } from './types/complaints';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +74,12 @@ export class Facade {
     this.complaintsService.getComplaintsNeighborhoodGroup().subscribe(res => {
       this.state.setComplaintsNeighborhood(res);
     })
+  }
+
+  fetchComplaints(dates?: GetComplaintsRequest) {
+    this.complaintsService.getComplaints(dates).subscribe(res => {
+      this.state.setComplaintsList(res);
+    });
   }
 
   fetchComplaint(id: string) {
