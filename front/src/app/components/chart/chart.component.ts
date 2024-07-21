@@ -36,7 +36,8 @@ export class ChartComponent implements OnInit {
           toolbar: {
             ...this.options.chart?.toolbar,
             show: false
-          }
+          },
+          redrawOnParentResize: true
         },
         dataLabels: {
           ...this.options.dataLabels

@@ -44,9 +44,21 @@ export class ChartsGalleryComponent implements OnInit {
     })
 
     this.momentDataObservable.subscribe(data => {
-      const { onMoment, after } = this.createMomentChart(data)
-      this.momentChartData.next(onMoment)
-      this.afterChartData.next(after)
+      if (!data) return
+      const total = data.true + data.false
+      const onMomentSeries = [
+        data.true * 100 / total, data.false * 100 / total
+      ]
+      const afterSeries = [
+        data.false * 100 / total, data.true * 100 / total
+      ]
+
+      this.momentChartData.next(
+        this.createMomentChart('No momento', onMomentSeries)
+      )
+      this.afterChartData.next(
+        this.createMomentChart('Após o ocorrido', afterSeries)
+      )
     })
 
     this.monthGroupDataObservable.subscribe(data => {
@@ -124,15 +136,10 @@ export class ChartsGalleryComponent implements OnInit {
     }
   }
 
-  createMomentChart(data: ComplaintsAtMoment): {
-    onMoment: ChartOptions, after: ChartOptions
-  } {
-    const total = data.true + data.false
-    const onMomentSeries = [data.true * 100 / total, data.false * 100 / total]
-    const afterSeries = [data.false * 100 / total, data.true * 100 / total]
 
-    const onMomentChartOptions: ChartOptions = {
-      series: onMomentSeries,
+  createMomentChart(label: string, series: number[]): ChartOptions {
+    return {
+      series: series,
       chart: {
         type: "donut",
       },
@@ -142,12 +149,13 @@ export class ChartsGalleryComponent implements OnInit {
       plotOptions: {
         pie: {
           donut: {
+            size: '80%',
             labels: {
               show: true,
               total: {
                 showAlways: true,
                 show: true,
-                label: "No momento",
+                label: label,
                 color: '#ffffff',
                 fontFamily: 'Poppins',
                 fontSize: '16px',
@@ -172,14 +180,6 @@ export class ChartsGalleryComponent implements OnInit {
       },
       colors: ['#ffffff', '#9886F2']
     }
-
-    const afterChartOptions: ChartOptions = {
-      ...onMomentChartOptions,
-      series: afterSeries
-    }
-    afterChartOptions.plotOptions!.pie!.donut!.labels!.total!.label = 'Após o ocorrido'
-
-    return { onMoment: onMomentChartOptions, after: afterChartOptions }
   }
 
   createMonthGroupChart(data: ComplaintsMonthGroup): ChartOptions {

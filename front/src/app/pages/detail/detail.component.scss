@@ -3,10 +3,15 @@
   align-items: center;
   gap: 1rem;
 
+  h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   button {
     border: none;
     background: transparent;
-    width: 2rem;
+    min-width: 2rem;
     height: 2rem;
     cursor: pointer;
 
@@ -20,7 +25,6 @@
 main {
   margin: auto;
   margin-top: 3rem;
-  width: 50rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -51,6 +55,11 @@ main {
     .infos {
       display: flex;
       gap: 1rem;
+
+      @media screen and (max-width: 558px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       .info {
         gap: .5rem;

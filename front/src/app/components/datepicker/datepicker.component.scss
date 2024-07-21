@@ -1,0 +1,39 @@
+.datepicker-container {
+  display: flex;
+  gap: .4rem;
+  margin-bottom: .5rem;
+
+  input {
+    border-radius: .5rem;
+    text-align: center;
+    padding: .2rem 2rem .2rem 1rem;
+    background-color: var(--gray-light);
+    color: var(--black-light);
+    border: none;
+  }
+
+  .clear-btn {
+    border: none;
+    background-color: transparent;
+    padding: .5rem;
+    cursor: pointer;
+  }
+
+  .apply-btn {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 0.7rem;
+    border: none;
+    padding: 0.5rem 1.3rem;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(.95);
+    }
+  }
+}
+
+.filter-name {
+  color: var(--gray-color);
+  margin-top: .5rem;
+}

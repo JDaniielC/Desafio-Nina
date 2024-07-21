@@ -14,6 +14,7 @@ import {
   GetComplaintsMonthGroupResponse,
   GetComplaintsGenderGroupResponse,
   GetComplaintResponse,
+  GetComplaintsRequest,
 } from '../types/complaints';
 import { first, map } from 'rxjs';
 
@@ -24,12 +25,13 @@ export class ComplaintsService {
 
   constructor(readonly http: HttpClient) { }
 
-  getComplaints() {
-    return this.http.get<GetComplaintsResponse>(
-      '/api/complaints'
-    ).pipe(first(), map(
-      (response): Complaint[] => response.complaints.map(el => (
-      {...el,
+  getComplaints(dates?: GetComplaintsRequest) {
+    let url = '/api/complaints'
+    if (dates) {
+      url += `?start_date=${dates.startDate}&end_date=${dates.endDate}`
+    }
+    return this.http.get<GetComplaintsResponse>(url).pipe(first(), map(
+      (response): Complaint[] => response.complaints.map(el => ({...el,
         user: {
           id: el.user_id,
           name: el.user_name,
@@ -41,8 +43,8 @@ export class ComplaintsService {
           ethnicity: el.user_ethnicity,
           gender: el.user_gender
         }
-      }
-    ))))
+      }))
+    ))
   }
 
   getComplaint(id: string) {

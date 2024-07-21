@@ -9,21 +9,34 @@ import {
   ComplaintsGenderGroup,
   ComplaintsMonthGroup,
   ComplaintsNeighborhood,
-  ComplaintsTypeGroup
+  ComplaintsTypeGroup,
+  GetComplaintsRequest
 } from '../../types/complaints';
 import { ChartComponent } from '../../components/chart/chart.component';
 import { ChartsGalleryComponent } from '../../components/charts-gallery/charts-gallery.component';
 import { TableComponent } from '../../components/table/table.component';
 import { Router } from '@angular/router';
+import { DatepickerComponent } from '../../components/datepicker/datepicker.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ChartComponent, ChartsGalleryComponent, TableComponent],
+  imports: [
+    CommonModule,
+    ChartComponent,
+    ChartsGalleryComponent,
+    TableComponent,
+    DatepickerComponent,
+    NgxSkeletonLoaderModule
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  isLoading: Observable<boolean> = new BehaviorSubject(false);
+
   genderGroupChartData: BehaviorSubject<
     ChartOptions
   > = new BehaviorSubject({} as ChartOptions);
@@ -61,6 +74,12 @@ export class HomeComponent implements OnInit {
       this.typeGroupChartData.next(this.createTypeGroupChart
       (res))
     })
+
+    this.isLoading = this.facade.getLoading()
+  }
+
+  fetchComplaints(dates?: GetComplaintsRequest) {
+    this.facade.fetchComplaints(dates)
   }
 
   selectComplaint(complaintId: string) {
