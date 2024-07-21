@@ -23,6 +23,10 @@
     width: 100%;
     gap: 1rem;
 
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
     app-chart {
       flex: 1;
       ::ng-deep .apexcharts-datalabel-value {

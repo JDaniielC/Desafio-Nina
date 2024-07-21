@@ -115,6 +115,11 @@ table {
       }
     }
 
+    @media screen and (max-width: 768px) {
+      position: inherit;
+      top: 2rem;
+    }
+
     button {
       appearance: none;
       border: none;

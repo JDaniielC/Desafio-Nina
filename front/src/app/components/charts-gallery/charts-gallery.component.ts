@@ -44,6 +44,7 @@ export class ChartsGalleryComponent implements OnInit {
     })
 
     this.momentDataObservable.subscribe(data => {
+      if (!data) return
       const total = data.true + data.false
       const onMomentSeries = [
         data.true * 100 / total, data.false * 100 / total
