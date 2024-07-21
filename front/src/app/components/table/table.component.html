@@ -19,7 +19,11 @@
   </tbody>
 
   <tfoot>
-    <button type="button" [disabled]="currentPage === 1">
+    <button
+      type="button"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+    >
       <img
         src="../../../assets/chevron-left.svg"
         alt="Voltar"
@@ -39,7 +43,11 @@
         }
       }
     </div>
-    <button type="button" [disabled]="currentPage === totalPages">
+    <button
+      type="button"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)"
+    >
       <img src="../../../assets/chevron-right.svg" alt="Avançar">
     </button>
   </tfoot>
