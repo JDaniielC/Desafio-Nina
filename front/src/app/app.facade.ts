@@ -43,6 +43,14 @@ export class Facade {
     return this.state.getComplaint();
   }
 
+  getLoading() {
+    return this.state.getLoading();
+  }
+
+  setLoading(loading: boolean) {
+    this.state.setLoading(loading);
+  }
+
   fetchAllComplaints() {
     this.complaintsService.getComplaints().subscribe(res => {
       this.state.setComplaintsList(res);

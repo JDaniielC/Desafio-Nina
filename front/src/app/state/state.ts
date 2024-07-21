@@ -18,7 +18,7 @@ import {
   providedIn: 'root'
 })
 export class State {
-  constructor() {}
+  private readonly loading = new BehaviorSubject<boolean>(false);
 
   private readonly complaintsList = new BehaviorSubject<Complaint[]>([]);
 
@@ -112,5 +112,13 @@ export class State {
 
   setComplaintsNeighborhood(neighborhoods: ComplaintsNeighborhood[]) {
     this.complaintsNeighborhood.next(neighborhoods);
+  }
+
+  getLoading() {
+    return this.loading.asObservable();
+  }
+
+  setLoading(loading: boolean) {
+    this.loading.next(loading);
   }
 }
