@@ -3,11 +3,15 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
+    entrypoint:
+      ./entrypoint.sh
     ports:
       - "8000:8000"
     volumes:
       - ./back:/usr/app/back
     image: nina/backend
+    environment:
+      DATABASE_URL: sqlite:///database.db
     networks:
       - nina-network
 
