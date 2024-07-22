@@ -11,6 +11,7 @@ engine = create_engine(Settings().DATABASE_URL)
 
 class Database:
     def __increment_count(self, d: dict, key: str):
+        """ Increments the value of a key in a dictionary. """
         if key not in d:
             d[key] = 0
         d[key] += 1
@@ -42,6 +43,7 @@ class Database:
         return "> 60"
     
     def __translate_month_int_to_name(self, month_num: int):
+        """ Translates a month number to its name. """
         months = {
             1: "Jan",
             2: "Fev",
@@ -65,10 +67,12 @@ class Database:
         return month_name
 
     def __get_all_complaints(self):
+        """ Returns all complaints from the database. """
         with Session(engine) as session:
             return session.query(Complaint).all()
     
     def __complaint_user_treatment(self, complaints: list):
+        """ Returns a list of complaints with user data. """
         complaints_with_user_data = []
         for complaint, user in complaints:
             complaint = complaint.__dict__
@@ -80,6 +84,7 @@ class Database:
         return complaints_with_user_data
 
     def get_complaints_filter(self, start_date: str = None, end_date: str = None):
+        """ Returns a list of filters to be used in a query. """
         filters = list()
         if start_date is not None:
             filters.append(Complaint.date >= start_date)
@@ -89,6 +94,7 @@ class Database:
         return filters
     
     def get_complaints(self, start_date: str = None, end_date: str = None):
+        """ Returns all complaints with user data. """
         with Session(engine) as session:
             filters = self.get_complaints_filter(start_date, end_date)
             complaints = (session
@@ -102,6 +108,7 @@ class Database:
     def get_complaints_with_pagination(self, start_date: str = None,
                                        end_date: str = None, page: int = 1,
                                        limit: int = 6):
+        """ Returns a list of complaints with user data and pagination. """
         offset = (page - 1) * limit
         with Session(engine) as session:
             filters = self.get_complaints_filter(start_date, end_date)
@@ -122,6 +129,7 @@ class Database:
             return complaints, total_pages
         
     def get_complaint(self, _id: str = None):
+        """ Returns a complaint with user data. """
         with Session(engine) as session:
             complaints = (session
                          .query(Complaint, User)
@@ -131,6 +139,7 @@ class Database:
             return self.__complaint_user_treatment(complaints)[0]
     
     def get_complaints_from_user(self, user_id: str):
+        """ Returns all complaints from a user. """
         with Session(engine) as session:
             complaints = (session
                          .query(Complaint, User)
@@ -140,12 +149,14 @@ class Database:
             return self.__complaint_user_treatment(complaints)
     
     def insert_complaint(self, new_complaint: dict):
+        """ Inserts a new complaint into the database. """
         with Session(engine) as session:
             complaint = Complaint(**new_complaint)
             session.add(complaint)
             session.commit()
 
     def update_complaint(self, _id: str, new_complaint: dict):
+        """ Updates a complaint in the database. """
         with Session(engine) as session:
             (session
                 .query(Complaint)
@@ -154,11 +165,13 @@ class Database:
             session.commit()
 
     def delete_complaint(self, _id: str):
+        """ Deletes a complaint from the database. """
         with Session(engine) as session:
             session.query(Complaint).filter(Complaint.id == _id).delete()
             session.commit()
 
     def group_by_gender(self):
+        """ Groups the number of complaints by gender """
         with Session(engine) as session:
             tuples = (session
                     .query(User.gender, func.count(User.gender))
@@ -197,10 +210,12 @@ class Database:
         return grouped_data
 
     def get_users(self):
+        """ Returns all users from the database. """
         with Session(engine) as session:
             return session.query(User).all()
 
     def get_user(self, _id: str = None):
+        """ Returns a user from the database. """
         with Session(engine) as session:
             return session.query(User).filter(User.id == _id).first()
     
