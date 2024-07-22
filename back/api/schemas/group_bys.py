@@ -25,14 +25,14 @@ class GroupByAgeGroup(BaseModel):
     plus_60: int = Field(0, alias="> 60")
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 class GroupByMoment(BaseModel):
     true: int = Field(0, alias="True")
     false: int = Field(0, alias="False")
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 class GroupByMonths(BaseModel):
     Jan: int = 0
