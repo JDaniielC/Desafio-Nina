@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-from api.schemas.complaints import ComplaintList, ComplaintUserSchema, ComplaintUserList
+from api.schemas.complaints import ComplaintUserSchema, ComplaintUserList
 from api.schemas.group_bys import *
 from fastapi import APIRouter, HTTPException
 from api.database.database import client
@@ -15,7 +15,6 @@ def get_complaints(start_date: Optional[str] = None, end_date: Optional[str] = N
     if (end_date):
         end_date = datetime.strptime(end_date, '%Y-%m-%d')
     complaints = client.get_complaints(start_date, end_date)
-    complaints.sort(key=lambda x: x['id'])
     return {'complaints': complaints}
 
 @router.get('/{complaint_id}', response_model=ComplaintUserSchema)
@@ -27,14 +26,14 @@ def get_complaint(complaint_id: str):
 
     return complaint
 
-@router.get('/user/{user_id}', response_model=ComplaintList)
+@router.get('/user/{user_id}', response_model=ComplaintUserList)
 def get_complaints_from_user(user_id: str):
-    complaint = client.get_complaint(None, user_id)
+    complaints = client.get_complaints_from_user(user_id)
 
-    if complaint is None:
+    if complaints is None:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Complaints not found.")
 
-    return {'complaints': complaint}
+    return {'complaints': complaints}
 
 @router.get('/group/types', response_model=GroupByTypes)
 def get_complaints_group_by_types():
@@ -42,7 +41,7 @@ def get_complaints_group_by_types():
 
 @router.get('/group/genders', response_model=GroupByGenders)
 def get_complaints_group_by_genders():
-    return client.group_by('user_gender')
+    return client.group_by_gender()
 
 @router.get('/group/age_group', response_model=GroupByAgeGroup)
 def get_complaints_group_by_age_group():
