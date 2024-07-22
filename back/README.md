@@ -1,6 +1,15 @@
 # Backend
 
+## Description
+
+This is the backend of the project.
+
 ## How to run locally
+
+0. Set the environment variables
+```bash
+  cp .env.example .env 
+```
 
 1. Install the environment
 ```bash
@@ -23,12 +32,17 @@ pip install poetry
 poetry install
 ```
 
-3. Run the application
+3. Run migrations creating the database and tables in the database (SQLite)
+```bash
+task migrate
+```
+
+4. Run the application
 ```bash
 task run
 ```
 
-4. Run the tests
+5. Run the tests
 ```bash
 task test
 ```
